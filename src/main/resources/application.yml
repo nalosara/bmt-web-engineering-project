@@ -4,3 +4,5 @@ configuration:
     description: 'BeMyTech website'
     developer: 'Sara Nalo'
     email: 'sara.nalo@stu.ibu.edu.ba'
+  mailsender:
+    default: 'sendgrid'
