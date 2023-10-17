@@ -1,6 +1,6 @@
 configuration:
   swagger:
     app: 'BeMyTech'
-    descripton: 'BeMyTech website'
+    description: 'BeMyTech website'
     developer: 'Sara Nalo'
     email: 'sara.nalo@stu.ibu.edu.ba'
