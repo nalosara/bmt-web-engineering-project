@@ -4,12 +4,14 @@ public class Order {
     private int id;
     private int productId;
     private int userId;
+    private String address;
     private int quantity;
 
-    public Order(int id, int productId, int userId, int quantity) {
+    public Order(int id, int productId, int userId, String address, int quantity) {
         this.id = id;
         this.productId = productId;
         this.userId = userId;
+        this.address = address;
         this.quantity = quantity;
     }
 
@@ -43,5 +45,13 @@ public class Order {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
