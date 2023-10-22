@@ -1,27 +1,24 @@
 package ba.ibu.edu.bemytech.core.model;
 
+import ba.ibu.edu.bemytech.core.model.enums.UserType;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class User {
-    private int id;
+    @Id
+    private String id;
     private String firstName;
     private String lastName;
-    private String emailAddress;
+    private String email;
     private String password;
-    private boolean authorization;
+    private UserType userType;
 
-    public User(int id, String firstName, String lastName, String emailAddress, String password, boolean authorization) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.password = password;
-        this.authorization = authorization;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,14 +38,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -57,11 +46,19 @@ public class User {
         this.password = password;
     }
 
-    public boolean isAuthorization() {
-        return authorization;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAuthorization(boolean authorization) {
-        this.authorization = authorization;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 }

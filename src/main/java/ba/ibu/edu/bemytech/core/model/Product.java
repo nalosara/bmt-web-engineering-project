@@ -1,23 +1,21 @@
 package ba.ibu.edu.bemytech.core.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Product {
-    private int id;
+    @Id
+    private String id;
     private String productName;
     private String description;
     private double price;
 
-    public Product(int id, String productName, String description, double price) {
-        this.id = id;
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,7 +1,6 @@
 package ba.ibu.edu.bemytech.core.service;
 
 import ba.ibu.edu.bemytech.core.model.Order;
-import ba.ibu.edu.bemytech.core.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
