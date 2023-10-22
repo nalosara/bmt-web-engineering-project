@@ -2,14 +2,10 @@ package ba.ibu.edu.bemytech.core.service;
 
 import ba.ibu.edu.bemytech.core.exceptions.repository.ResourceNotFoundException;
 import ba.ibu.edu.bemytech.core.model.Order;
-import ba.ibu.edu.bemytech.core.model.Product;
 import ba.ibu.edu.bemytech.core.repository.OrderRepository;
 import ba.ibu.edu.bemytech.rest.dto.OrderDTO;
 import ba.ibu.edu.bemytech.rest.dto.OrderRequestDTO;
-import ba.ibu.edu.bemytech.rest.dto.ProductDTO;
-import ba.ibu.edu.bemytech.rest.dto.ProductRequestDTO;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;

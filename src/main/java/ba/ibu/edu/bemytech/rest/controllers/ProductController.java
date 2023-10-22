@@ -1,11 +1,11 @@
 package ba.ibu.edu.bemytech.rest.controllers;
 
-import ba.ibu.edu.bemytech.core.model.Product;
 import ba.ibu.edu.bemytech.core.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import ba.ibu.edu.bemytech.rest.dto.ProductDTO;
+import ba.ibu.edu.bemytech.rest.dto.ProductRequestDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,13 +18,29 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
-    public List<Product> findAll() {
-        return productService.findAll();
+    @RequestMapping(method = RequestMethod.GET, path = "/")
+    public ResponseEntity<List<ProductDTO>> getProducts() {
+        return ResponseEntity.ok(productService.getProducts());
     }
 
-    @GetMapping("/{id}")
-    public Product findById(@PathVariable int id) {
-        return productService.findById(id);
+    @RequestMapping(method = RequestMethod.POST, path = "/add-product")
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductRequestDTO product) {
+        return ResponseEntity.ok(productService.addProduct(product));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable String id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable String id, @RequestBody ProductRequestDTO product) {
+        return ResponseEntity.ok(productService.updateProduct(id, product));
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable String id) {
+        productService.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
