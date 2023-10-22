@@ -1,20 +1,27 @@
-package ba.ibu.edu.bemytech.core.model;
+package ba.ibu.edu.bemytech.rest.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import ba.ibu.edu.bemytech.core.model.Order;
+import ba.ibu.edu.bemytech.core.model.Product;
 
 import java.util.Date;
 import java.util.List;
 
-@Document
-public class Order {
-    @Id
+public class OrderDTO {
     private String id;
     private List<Product> products;
     private String userId;
     private String address;
     private int quantity;
     private Date orderDate;
+
+    public OrderDTO(Order order) {
+        this.id = order.getId();
+        this.products = order.getProducts();
+        this.userId = order.getUserId();
+        this.address = order.getAddress();
+        this.quantity = order.getQuantity();
+        this.orderDate = order.getOrderDate();
+    }
 
     public String getId() {
         return id;
@@ -32,12 +39,12 @@ public class Order {
         this.userId = userId;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public String getAddress() {
@@ -48,12 +55,12 @@ public class Order {
         this.address = address;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Date getOrderDate() {
