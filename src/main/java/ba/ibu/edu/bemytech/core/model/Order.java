@@ -10,10 +10,9 @@ import java.util.List;
 public class Order {
     @Id
     private String id;
-    private List<Product> products;
+    private List<OrderedProduct> products;
     private String userId;
     private String address;
-    private int quantity;
     private Date orderDate;
 
     public String getId() {
@@ -32,14 +31,6 @@ public class Order {
         this.userId = userId;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -48,19 +39,19 @@ public class Order {
         this.address = address;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public Date getOrderDate() {
         return orderDate;
     }
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public List<OrderedProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<OrderedProduct> products) {
+        this.products = products;
     }
 }

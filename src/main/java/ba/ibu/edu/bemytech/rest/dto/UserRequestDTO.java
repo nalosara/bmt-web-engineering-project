@@ -6,7 +6,6 @@ import ba.ibu.edu.bemytech.core.model.enums.UserType;
 import java.util.Date;
 
 public class UserRequestDTO {
-    private UserType userType;
     private String firstName;
     private String lastName;
     private String email;
@@ -15,7 +14,6 @@ public class UserRequestDTO {
     public UserRequestDTO() {}
 
     public UserRequestDTO(User user) {
-        this.userType = user.getUserType();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
@@ -24,20 +22,11 @@ public class UserRequestDTO {
 
     public User toEntity() {
         User user = new User();
-        user.setUserType(userType);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPassword(password);
         return user;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
     }
 
     public String getFirstName() {

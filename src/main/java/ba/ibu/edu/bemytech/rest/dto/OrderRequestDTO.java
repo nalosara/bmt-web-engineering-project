@@ -1,14 +1,14 @@
 package ba.ibu.edu.bemytech.rest.dto;
 
 import ba.ibu.edu.bemytech.core.model.Order;
-import ba.ibu.edu.bemytech.core.model.Product;
+import ba.ibu.edu.bemytech.core.model.OrderedProduct;
 
 import java.util.Date;
 import java.util.List;
 
 public class OrderRequestDTO {
     private String userId;
-    private List<Product> products;
+    private List<OrderedProduct> products;
     private String address;
     private int quantity;
 
@@ -18,7 +18,6 @@ public class OrderRequestDTO {
         this.userId = order.getUserId();
         this.products = order.getProducts();
         this.address = order.getAddress();
-        this.quantity = order.getQuantity();
     }
 
     public Order toEntity() {
@@ -26,7 +25,6 @@ public class OrderRequestDTO {
         order.setUserId(userId);
         order.setProducts(products);
         order.setAddress(address);
-        order.setQuantity(quantity);
         order.setOrderDate(new Date());
         return order;
     }
@@ -37,14 +35,6 @@ public class OrderRequestDTO {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     public String getAddress() {
@@ -61,5 +51,13 @@ public class OrderRequestDTO {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public List<OrderedProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<OrderedProduct> products) {
+        this.products = products;
     }
 }

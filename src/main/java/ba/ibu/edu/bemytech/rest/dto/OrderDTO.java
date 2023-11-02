@@ -1,17 +1,16 @@
 package ba.ibu.edu.bemytech.rest.dto;
 
 import ba.ibu.edu.bemytech.core.model.Order;
-import ba.ibu.edu.bemytech.core.model.Product;
+import ba.ibu.edu.bemytech.core.model.OrderedProduct;
 
 import java.util.Date;
 import java.util.List;
 
 public class OrderDTO {
     private String id;
-    private List<Product> products;
+    private List<OrderedProduct> products;
     private String userId;
     private String address;
-    private int quantity;
     private Date orderDate;
 
     public OrderDTO(Order order) {
@@ -19,7 +18,6 @@ public class OrderDTO {
         this.products = order.getProducts();
         this.userId = order.getUserId();
         this.address = order.getAddress();
-        this.quantity = order.getQuantity();
         this.orderDate = order.getOrderDate();
     }
 
@@ -39,14 +37,6 @@ public class OrderDTO {
         this.userId = userId;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -55,19 +45,19 @@ public class OrderDTO {
         this.address = address;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public Date getOrderDate() {
         return orderDate;
     }
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public List<OrderedProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<OrderedProduct> products) {
+        this.products = products;
     }
 }
