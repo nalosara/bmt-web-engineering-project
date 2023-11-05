@@ -1,11 +1,11 @@
 package ba.ibu.edu.bemytech.rest.controllers;
 
-import ba.ibu.edu.bemytech.core.model.Order;
 import ba.ibu.edu.bemytech.core.service.OrderService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import ba.ibu.edu.bemytech.rest.dto.OrderDTO;
+import ba.ibu.edu.bemytech.rest.dto.OrderRequestDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,13 +18,29 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping
-    public List<Order> findAll() {
-        return orderService.findAll();
+    @RequestMapping(method = RequestMethod.GET, path = "/")
+    public ResponseEntity<List<OrderDTO>> getOrders() {
+        return ResponseEntity.ok(orderService.getOrders());
     }
 
-    @GetMapping("/{id}")
-    public Order findById(@PathVariable int id) {
-        return orderService.findById(id);
+    @RequestMapping(method = RequestMethod.POST, path = "/add-order")
+    public ResponseEntity<OrderDTO> addOrder(@RequestBody OrderRequestDTO order) {
+        return ResponseEntity.ok(orderService.addOrder(order));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable String id) {
+        return ResponseEntity.ok(orderService.getOrderById(id));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    public ResponseEntity<OrderDTO> updateOrder(@PathVariable String id, @RequestBody OrderRequestDTO order) {
+        return ResponseEntity.ok(orderService.updateOrder(id, order));
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
+        orderService.deleteOrder(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -6,3 +6,9 @@ configuration:
     email: 'sara.nalo@stu.ibu.edu.ba'
   mailsender:
     default: 'sendgrid'
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://saranalo:AQlXNTKpoufi6zQJ@bmt.6xnqrro.mongodb.net/?retryWrites=true&w=majority
+      database: BMT

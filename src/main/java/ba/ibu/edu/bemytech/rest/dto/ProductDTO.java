@@ -1,16 +1,21 @@
-package ba.ibu.edu.bemytech.core.model;
+package ba.ibu.edu.bemytech.rest.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import ba.ibu.edu.bemytech.core.model.Product;
 
-@Document
-public class Product {
-    @Id
+public class ProductDTO {
     private String id;
-    private String productName;
+    private String name;
     private String description;
     private int quantityInStock;
     private double price;
+
+    public ProductDTO(Product product){
+        this.id = product.getId();
+        this.name = product.getProductName();
+        this.description = product.getDescription();
+        this.quantityInStock = product.getQuantityInStock();
+        this.price = product.getPrice();
+    }
 
     public String getId() {
         return id;
@@ -20,12 +25,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

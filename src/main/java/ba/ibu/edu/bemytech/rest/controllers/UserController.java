@@ -2,6 +2,10 @@ package ba.ibu.edu.bemytech.rest.controllers;
 
 import ba.ibu.edu.bemytech.core.model.User;
 import ba.ibu.edu.bemytech.core.service.UserService;
+import ba.ibu.edu.bemytech.rest.dto.UserDTO;
+import ba.ibu.edu.bemytech.rest.dto.UserRequestDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,14 +19,30 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> findAll() {
-        return userService.findAll();
+    @RequestMapping(method = RequestMethod.GET, path = "/")
+    public ResponseEntity<List<UserDTO>> getUsers() {
+        return ResponseEntity.ok(userService.getUsers());
     }
 
-    @GetMapping("/{id}")
-    public User findById(@PathVariable int id) {
-        return userService.findById(id);
+    @RequestMapping(method = RequestMethod.POST, path = "/register")
+    public ResponseEntity<UserDTO> register(@RequestBody UserRequestDTO user) {
+        return ResponseEntity.ok(userService.addUser(user));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable String id) {
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable String id, @RequestBody UserRequestDTO user) {
+        return ResponseEntity.ok(userService.updateUser(id, user));
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/send-to-all")

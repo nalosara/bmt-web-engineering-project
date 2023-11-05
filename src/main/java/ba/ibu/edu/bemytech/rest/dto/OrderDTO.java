@@ -1,19 +1,25 @@
-package ba.ibu.edu.bemytech.core.model;
+package ba.ibu.edu.bemytech.rest.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import ba.ibu.edu.bemytech.core.model.Order;
+import ba.ibu.edu.bemytech.core.model.OrderedProduct;
 
 import java.util.Date;
 import java.util.List;
 
-@Document
-public class Order {
-    @Id
+public class OrderDTO {
     private String id;
     private List<OrderedProduct> products;
     private String userId;
     private String address;
     private Date orderDate;
+
+    public OrderDTO(Order order) {
+        this.id = order.getId();
+        this.products = order.getProducts();
+        this.userId = order.getUserId();
+        this.address = order.getAddress();
+        this.orderDate = order.getOrderDate();
+    }
 
     public String getId() {
         return id;
