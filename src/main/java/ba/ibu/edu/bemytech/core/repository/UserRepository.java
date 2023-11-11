@@ -3,6 +3,7 @@ package ba.ibu.edu.bemytech.core.repository;
 import ba.ibu.edu.bemytech.core.model.User;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,6 +17,10 @@ public interface UserRepository extends MongoRepository<User, String> {
     """)
     List<User> findAllCustom();
 
+    @Query(value="{$or:[{email:'?0'}, {username:'?0'}]}")
+    Optional<User> findByUsernameOrEmail(String username);
+
+    Optional<User> findFirstByEmailLike(String emailPattern);
 
 
 }

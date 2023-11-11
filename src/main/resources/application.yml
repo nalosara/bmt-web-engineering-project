@@ -12,3 +12,7 @@ spring:
     mongodb:
       uri: mongodb+srv://saranalo:AQlXNTKpoufi6zQJ@bmt.6xnqrro.mongodb.net/?retryWrites=true&w=majority
       database: BMT
+
+security:
+  jwt:
+    secret: 'BeMyTech'

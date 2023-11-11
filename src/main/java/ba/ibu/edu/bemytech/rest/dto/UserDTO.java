@@ -8,12 +8,14 @@ import java.util.Date;
 public class UserDTO {
     private String id;
     private String name;
+    private String username;
     private String email;
     private UserType userType;
 
     public UserDTO(User user) {
         this.id = user.getId();
         this.name = user.getFirstName() + " " + user.getLastName();
+        this.username = user.getUsername();
         this.email = user.getEmail();
         this.userType = user.getUserType();
     }
@@ -32,6 +34,14 @@ public class UserDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
