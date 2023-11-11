@@ -15,4 +15,4 @@ spring:
 
 security:
   jwt:
-    secret: 'BeMyTech'
+    secret: 'QTcxvcLS0IR3JFLLkvMOBvXCde7DB8lKCnMMGOyI59s'

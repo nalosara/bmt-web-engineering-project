@@ -25,8 +25,10 @@ import org.springframework.security.authentication.AuthenticationProvider;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
+
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Autowired
     private UserService userService;
 

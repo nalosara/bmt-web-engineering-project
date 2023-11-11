@@ -71,7 +71,6 @@ public class UserService {
 
     public UserDTO filterByEmail(String email) {
         Optional<User> user = userRepository.findFirstByEmailLike(email);
-        // Optional<User> user = userRepository.findByEmailCustom(email);
         return user.map(UserDTO::new).orElse(null);
     }
 

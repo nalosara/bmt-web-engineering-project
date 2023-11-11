@@ -46,7 +46,6 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    @Override
     public String getUsername() {
         return username;
     }
@@ -55,7 +54,6 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
