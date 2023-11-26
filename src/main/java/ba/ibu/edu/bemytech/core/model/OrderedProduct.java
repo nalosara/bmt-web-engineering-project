@@ -2,8 +2,12 @@ package ba.ibu.edu.bemytech.core.model;
 
 public class OrderedProduct {
     private Product product;
-
     private int quantity;
+
+    public OrderedProduct(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
 
     public Product getProduct() {
         return product;

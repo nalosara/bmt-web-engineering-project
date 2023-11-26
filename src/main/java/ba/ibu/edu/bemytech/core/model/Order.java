@@ -15,6 +15,15 @@ public class Order {
     private String address;
     private Date orderDate;
 
+    public Order() {}
+
+    public Order(String id, List<OrderedProduct> products, String userId, String address){
+        this.id = id;
+        this.products = products;
+        this.userId = userId;
+        this.address = address;
+    }
+
     public String getId() {
         return id;
     }

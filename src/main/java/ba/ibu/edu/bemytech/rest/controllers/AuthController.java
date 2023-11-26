@@ -29,4 +29,9 @@ public class AuthController {
     public ResponseEntity<LoginDTO> login(@RequestBody LoginRequestDTO loginRequest) {
         return ResponseEntity.ok(authService.signIn(loginRequest));
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/get")
+    public ResponseEntity<String> login() {
+        return ResponseEntity.ok("GOOD");
+    }
 }

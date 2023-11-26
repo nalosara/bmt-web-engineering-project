@@ -11,10 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
-    @Aggregation(pipeline = """
-        { $match:  { _id:  { $exists:  true } } }
-    """)
-    List<User> findAllCustom();
+    Optional<Product> findByProductName(String productName);
 
 
 }
