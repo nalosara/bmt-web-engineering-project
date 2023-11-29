@@ -5,8 +5,10 @@ import ba.ibu.edu.bemytech.core.model.Order;
 import ba.ibu.edu.bemytech.core.repository.OrderRepository;
 import ba.ibu.edu.bemytech.rest.dto.OrderDTO;
 import ba.ibu.edu.bemytech.rest.dto.OrderRequestDTO;
+import ba.ibu.edu.bemytech.rest.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +17,11 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final UserService userService;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, UserService userService) {
         this.orderRepository = orderRepository;
+        this.userService = userService;
     }
 
     public List<OrderDTO> getOrders() {
@@ -37,6 +41,12 @@ public class OrderService {
     public OrderDTO addOrder(OrderRequestDTO payload) {
         Order order = orderRepository.save(payload.toEntity());
         return new OrderDTO(order);
+    }
+
+    public List<OrderDTO> findByUserId(String userId){
+        List<Order> orders = orderRepository.findByUserId(userId);
+
+        return orders.stream().map(OrderDTO::new).collect(toList());
     }
 
     public OrderDTO updateOrder(String id, OrderRequestDTO payload) {

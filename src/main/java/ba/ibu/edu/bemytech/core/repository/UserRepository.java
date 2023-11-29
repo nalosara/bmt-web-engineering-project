@@ -12,11 +12,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 
-    @Aggregation(pipeline = """
-        { $match:  { _id:  { $exists:  true } } }
-    """)
-    List<User> findAllCustom();
-
     Optional<User> findByEmail(String email);
 
     @Query(value="{$or:[{email:'?0'}, {username:'?0'}]}")
