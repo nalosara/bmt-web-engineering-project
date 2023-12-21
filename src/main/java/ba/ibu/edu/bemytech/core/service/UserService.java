@@ -7,6 +7,9 @@ import ba.ibu.edu.bemytech.core.repository.UserRepository;
 import ba.ibu.edu.bemytech.rest.dto.UserDTO;
 import ba.ibu.edu.bemytech.rest.dto.UserRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,5 +67,20 @@ public class UserService {
     public String sendEmailToAllUsers(String message) {
         List<User> users = userRepository.findAll();
         return mailSender.send(users, message);
+    }
+
+    public UserDTO filterByEmail(String email) {
+        Optional<User> user = userRepository.findFirstByEmailLike(email);
+        return user.map(UserDTO::new).orElse(null);
+    }
+
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) {
+                return userRepository.findByUsernameOrEmail(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            }
+        };
     }
 }

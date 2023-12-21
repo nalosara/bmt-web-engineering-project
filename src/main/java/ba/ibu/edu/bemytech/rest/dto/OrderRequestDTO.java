@@ -10,7 +10,6 @@ public class OrderRequestDTO {
     private String userId;
     private List<OrderedProduct> products;
     private String address;
-    private int quantity;
 
     public OrderRequestDTO() {}
 
@@ -43,14 +42,6 @@ public class OrderRequestDTO {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public List<OrderedProduct> getProducts() {

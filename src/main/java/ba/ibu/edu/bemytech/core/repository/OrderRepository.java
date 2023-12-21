@@ -1,6 +1,7 @@
 package ba.ibu.edu.bemytech.core.repository;
 
 import ba.ibu.edu.bemytech.core.model.Order;
+import ba.ibu.edu.bemytech.core.model.Product;
 import ba.ibu.edu.bemytech.core.model.User;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -12,9 +13,8 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends MongoRepository<Order, String> {
 
-    @Aggregation(pipeline = """
-        { $match:  { _id:  { $exists:  true } } }
-    """)
-    List<User> findAllCustom();
+    Optional<Order> findByAddress(String address);
+
+    List<Order> findByUserId(String userId);
 
 }
