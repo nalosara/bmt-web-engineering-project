@@ -3,13 +3,13 @@ package ba.ibu.edu.bemytech.rest.websockets;
 import ba.ibu.edu.bemytech.core.model.User;
 import ba.ibu.edu.bemytech.core.service.JwtService;
 import ba.ibu.edu.bemytech.core.service.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.WebSocketMessage;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.*;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.messaging.simp.SimpMessageHeaderAccessor.getUser;
@@ -57,5 +57,30 @@ public class MainSocketHandler implements WebSocketHandler {
         System.out.println("Message received: " + messageReceived);
     }
 
+    private User getUser(WebSocketSession session) throws IOException {
+        List<String> headers = session.getHandshakeHeaders().getOrEmpty("authorization");
+        if (headers.size() == 0) {
+            session.close();
+            return null;
+        }
+
+        String jwt = headers.get(0).substring(7);
+        String userEmail = jwtService.extractUserName(jwt);
+
+        UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
+        return (User) userDetails;
+    }
+
+    public void broadcastMessage(String message) throws IOException {
+        sessions.forEach((key, session) -> {
+            try {
+                if (session.isOpen()) {
+                    session.sendMessage(new TextMessage(message));
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 
 }
