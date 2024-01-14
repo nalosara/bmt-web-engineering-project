@@ -5,6 +5,7 @@ import ba.ibu.edu.bemytech.core.model.Product;
 public class ProductRequestDTO {
     private String productName;
     private String description;
+    private String imageUrl;
     private int quantityInStock;
     private double price;
 
@@ -13,6 +14,7 @@ public class ProductRequestDTO {
     public ProductRequestDTO(Product product) {
         this.productName = product.getProductName();
         this.description = product.getDescription();
+        this.imageUrl = product.getImageUrl();
         this.quantityInStock = product.getQuantityInStock();
         this.price = product.getPrice();
     }
@@ -21,6 +23,7 @@ public class ProductRequestDTO {
         Product product = new Product();
         product.setProductName(productName);
         product.setDescription(description);
+        product.setImageUrl(imageUrl);
         product.setQuantityInStock(quantityInStock);
         product.setPrice(price);
         return product;
@@ -40,6 +43,14 @@ public class ProductRequestDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public double getPrice() {

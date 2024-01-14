@@ -8,11 +8,13 @@ public class Product {
     @Id
     private String id;
     private String productName;
+    private String imageUrl;
     private String description;
     private int quantityInStock;
     private double price;
 
     public Product() {};
+
 
     public Product(String id, String productName, String description, int quantityInStock, double price) {
         this.id = id;
@@ -36,6 +38,13 @@ public class Product {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getDescription() {
