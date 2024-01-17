@@ -10,6 +10,7 @@ public class OrderDTO {
     private String id;
     private List<OrderedProduct> products;
     private String userId;
+    private String username;
     private String address;
     private Date orderDate;
 
@@ -17,6 +18,7 @@ public class OrderDTO {
         this.id = order.getId();
         this.products = order.getProducts();
         this.userId = order.getUserId();
+        this.username = order.getUsername();
         this.address = order.getAddress();
         this.orderDate = order.getOrderDate();
     }
@@ -35,6 +37,14 @@ public class OrderDTO {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getAddress() {

@@ -32,10 +32,18 @@ public class OrderService {
 
     public OrderDTO getOrderById(String id) {
         Optional<Order> order = orderRepository.findById(id);
-        if(order.isEmpty()) {
+        if (order.isEmpty()) {
             throw new ResourceNotFoundException("The order with the given ID does not exist!");
         }
         return new OrderDTO(order.get());
+    }
+
+    public List<OrderDTO> findByUsername(String username) {
+        List<Order> orders = orderRepository.findByUsername(username);
+        if (orders.isEmpty()) {
+            throw new ResourceNotFoundException("Orders do not exist!");
+        }
+        return orders.stream().map(OrderDTO::new).collect(toList());
     }
 
     public OrderDTO addOrder(OrderRequestDTO payload) {
@@ -43,7 +51,7 @@ public class OrderService {
         return new OrderDTO(order);
     }
 
-    public List<OrderDTO> findByUserId(String userId){
+    public List<OrderDTO> findByUserId(String userId) {
         List<Order> orders = orderRepository.findByUserId(userId);
 
         return orders.stream().map(OrderDTO::new).collect(toList());

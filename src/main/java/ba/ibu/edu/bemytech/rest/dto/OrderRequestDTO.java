@@ -8,6 +8,7 @@ import java.util.List;
 
 public class OrderRequestDTO {
     private String userId;
+    private String username;
     private List<OrderedProduct> products;
     private String address;
 
@@ -15,6 +16,7 @@ public class OrderRequestDTO {
 
     public OrderRequestDTO(Order order) {
         this.userId = order.getUserId();
+        this.username = order.getUsername();
         this.products = order.getProducts();
         this.address = order.getAddress();
     }
@@ -22,6 +24,7 @@ public class OrderRequestDTO {
     public Order toEntity() {
         Order order = new Order();
         order.setUserId(userId);
+        order.setUsername(username);
         order.setProducts(products);
         order.setAddress(address);
         order.setOrderDate(new Date());
@@ -34,6 +37,14 @@ public class OrderRequestDTO {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getAddress() {

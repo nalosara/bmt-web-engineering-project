@@ -12,6 +12,7 @@ public class Order {
     private String id;
     private List<OrderedProduct> products;
     private String userId;
+    private String username;
     private String address;
     private Date orderDate;
 
@@ -46,6 +47,14 @@ public class Order {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getOrderDate() {

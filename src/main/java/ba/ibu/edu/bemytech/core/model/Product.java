@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Product {
     @Id
     private String id;
-    private String productName;
+    private String name;
     private String imageUrl;
     private String description;
     private int quantityInStock;
@@ -16,9 +16,9 @@ public class Product {
     public Product() {};
 
 
-    public Product(String id, String productName, String description, int quantityInStock, double price) {
+    public Product(String id, String name, String description, int quantityInStock, double price) {
         this.id = id;
-        this.productName = productName;
+        this.name = name;
         this.description = description;
         this.quantityInStock = quantityInStock;
         this.price = price;
@@ -32,12 +32,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
     public String getImageUrl() {
         return imageUrl;

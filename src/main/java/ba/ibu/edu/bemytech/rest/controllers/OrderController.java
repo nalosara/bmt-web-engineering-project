@@ -33,10 +33,15 @@ public class OrderController {
         return ResponseEntity.ok(orderService.addOrder(order));
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/user/{userId}")
+    @RequestMapping(method = RequestMethod.GET, path = "/userById/{userId}")
     @PreAuthorize("hasAuthority('MEMBER')")
     public ResponseEntity<List<OrderDTO>> findByUserId(@PathVariable String userId) {
         return ResponseEntity.ok(orderService.findByUserId(userId));
+    }
+    @RequestMapping(method = RequestMethod.GET, path = "/userByUsername/{username}")
+    @PreAuthorize("hasAuthority('MEMBER')")
+    public ResponseEntity<List<OrderDTO>> findByUsername(@PathVariable String username) {
+        return ResponseEntity.ok(orderService.findByUsername(username));
     }
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -51,7 +56,7 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MEMBER, ADMIN')")
     public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
         orderService.deleteOrder(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

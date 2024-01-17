@@ -12,7 +12,7 @@ public class ProductDTO {
 
     public ProductDTO(Product product){
         this.id = product.getId();
-        this.name = product.getProductName();
+        this.name = product.getName();
         this.description = product.getDescription();
         this.imageUrl = product.getImageUrl();
         this.quantityInStock = product.getQuantityInStock();

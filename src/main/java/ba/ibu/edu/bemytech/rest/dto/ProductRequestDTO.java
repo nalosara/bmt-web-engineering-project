@@ -3,7 +3,7 @@ package ba.ibu.edu.bemytech.rest.dto;
 import ba.ibu.edu.bemytech.core.model.Product;
 
 public class ProductRequestDTO {
-    private String productName;
+    private String name;
     private String description;
     private String imageUrl;
     private int quantityInStock;
@@ -12,7 +12,7 @@ public class ProductRequestDTO {
     public ProductRequestDTO() {}
 
     public ProductRequestDTO(Product product) {
-        this.productName = product.getProductName();
+        this.name = product.getName();
         this.description = product.getDescription();
         this.imageUrl = product.getImageUrl();
         this.quantityInStock = product.getQuantityInStock();
@@ -21,7 +21,7 @@ public class ProductRequestDTO {
 
     public Product toEntity() {
         Product product = new Product();
-        product.setProductName(productName);
+        product.setName(name);
         product.setDescription(description);
         product.setImageUrl(imageUrl);
         product.setQuantityInStock(quantityInStock);
@@ -29,12 +29,12 @@ public class ProductRequestDTO {
         return product;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
