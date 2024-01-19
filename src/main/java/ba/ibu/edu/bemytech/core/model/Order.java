@@ -10,7 +10,7 @@ import java.util.List;
 public class Order {
     @Id
     private String id;
-    private List<OrderedProduct> products;
+    private List<Cart> products;
     private String userId;
     private String username;
     private String address;
@@ -18,7 +18,7 @@ public class Order {
 
     public Order() {}
 
-    public Order(String id, List<OrderedProduct> products, String userId, String address){
+    public Order(String id, List<Cart> products, String userId, String address){
         this.id = id;
         this.products = products;
         this.userId = userId;
@@ -65,11 +65,11 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public List<OrderedProduct> getProducts() {
+    public List<Cart> getProducts() {
         return products;
     }
 
-    public void setProducts(List<OrderedProduct> products) {
+    public void setProducts(List<Cart> products) {
         this.products = products;
     }
 }

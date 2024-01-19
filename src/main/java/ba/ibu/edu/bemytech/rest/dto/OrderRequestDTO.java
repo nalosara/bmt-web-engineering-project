@@ -1,7 +1,7 @@
 package ba.ibu.edu.bemytech.rest.dto;
 
 import ba.ibu.edu.bemytech.core.model.Order;
-import ba.ibu.edu.bemytech.core.model.OrderedProduct;
+import ba.ibu.edu.bemytech.core.model.Cart;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public class OrderRequestDTO {
     private String userId;
     private String username;
-    private List<OrderedProduct> products;
+    private List<Cart> products;
     private String address;
 
     public OrderRequestDTO() {}
@@ -55,11 +55,11 @@ public class OrderRequestDTO {
         this.address = address;
     }
 
-    public List<OrderedProduct> getProducts() {
+    public List<Cart> getProducts() {
         return products;
     }
 
-    public void setProducts(List<OrderedProduct> products) {
+    public void setProducts(List<Cart> products) {
         this.products = products;
     }
 }
