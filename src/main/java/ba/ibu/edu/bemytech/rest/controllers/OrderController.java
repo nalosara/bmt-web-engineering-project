@@ -35,12 +35,12 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/userById/{userId}")
     @PreAuthorize("hasAuthority('MEMBER')")
-    public ResponseEntity<List<OrderDTO>> findByUserId(@PathVariable String userId) {
+    public ResponseEntity<OrderDTO> findByUserId(@PathVariable String userId) {
         return ResponseEntity.ok(orderService.findByUserId(userId));
     }
     @RequestMapping(method = RequestMethod.GET, path = "/userByUsername/{username}")
     @PreAuthorize("hasAuthority('MEMBER')")
-    public ResponseEntity<List<OrderDTO>> findByUsername(@PathVariable String username) {
+    public ResponseEntity<OrderDTO> findByUsername(@PathVariable String username) {
         return ResponseEntity.ok(orderService.findByUsername(username));
     }
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")

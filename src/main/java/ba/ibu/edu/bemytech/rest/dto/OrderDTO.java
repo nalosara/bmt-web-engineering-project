@@ -1,24 +1,25 @@
 package ba.ibu.edu.bemytech.rest.dto;
 
 import ba.ibu.edu.bemytech.core.model.Order;
-import ba.ibu.edu.bemytech.core.model.Cart;
+import ba.ibu.edu.bemytech.core.model.Product;
 
 import java.util.Date;
-import java.util.List;
 
 public class OrderDTO {
     private String id;
-    private List<Cart> products;
     private String userId;
     private String username;
+    private Product product;
+    private  int quantity;
     private String address;
     private Date orderDate;
 
     public OrderDTO(Order order) {
         this.id = order.getId();
-        this.products = order.getProducts();
         this.userId = order.getUserId();
         this.username = order.getUsername();
+        this.product = order.getProduct();
+        this.quantity = order.getQuantity();
         this.address = order.getAddress();
         this.orderDate = order.getOrderDate();
     }
@@ -63,11 +64,19 @@ public class OrderDTO {
         this.orderDate = orderDate;
     }
 
-    public List<Cart> getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(List<Cart> products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

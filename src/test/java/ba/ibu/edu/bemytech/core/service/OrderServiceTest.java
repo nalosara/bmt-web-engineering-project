@@ -1,22 +1,13 @@
 package ba.ibu.edu.bemytech.core.service;
 
-import ba.ibu.edu.bemytech.core.model.Order;
-import ba.ibu.edu.bemytech.core.model.Cart;
-import ba.ibu.edu.bemytech.core.model.Product;
 import ba.ibu.edu.bemytech.core.repository.OrderRepository;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 
 @AutoConfigureMockMvc
