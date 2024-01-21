@@ -1,5 +1,6 @@
 package ba.ibu.edu.bemytech.rest.controllers;
 
+import ba.ibu.edu.bemytech.core.model.User;
 import ba.ibu.edu.bemytech.core.service.UserService;
 import ba.ibu.edu.bemytech.rest.dto.UserDTO;
 import ba.ibu.edu.bemytech.rest.dto.UserRequestDTO;
@@ -33,10 +34,15 @@ public class UserController {
         return ResponseEntity.ok(userService.addUser(user));
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/user-by-id/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDTO> getUserById(@PathVariable String id) {
         return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/user-by-username/{username}")
+    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUserByUsername(username));
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")

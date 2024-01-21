@@ -5,6 +5,7 @@ import ba.ibu.edu.bemytech.rest.dto.OrderRequestDTO;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -12,9 +13,9 @@ public interface OrderRepository extends MongoRepository<Order, String> {
 
     Optional<Order> findByAddress(String address);
 
-    Order findByUserId(String userId);
+    List<Order> findByUserId(String userId);
 
-    Order findByUsername(String username);
+    List<Order> findByUsername(String username);
 
 
 }

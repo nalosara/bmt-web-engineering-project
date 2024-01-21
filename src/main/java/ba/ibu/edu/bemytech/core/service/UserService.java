@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,6 +40,16 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
         if(user.isEmpty()) {
             throw new ResourceNotFoundException("The user with the given ID does not exist!");
+        }
+        return new UserDTO(user.get());
+    }
+
+    public UserDTO getUserByUsername(String username) {
+        Optional<User> user = userRepository.findUserByUsername(username);
+        if (user.isPresent()) {
+            System.out.println("User found for username: " + username);
+        } else {
+            System.out.println("User not found for username: " + username);
         }
         return new UserDTO(user.get());
     }

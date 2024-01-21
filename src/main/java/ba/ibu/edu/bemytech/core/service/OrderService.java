@@ -38,9 +38,9 @@ public class OrderService {
         return new OrderDTO(order.get());
     }
 
-    public OrderDTO findByUsername(String username) {
-        Order order = orderRepository.findByUsername(username);
-        return new OrderDTO(order);
+    public List<OrderDTO> findByUsername(String username) {
+        List<Order> orders = orderRepository.findByUsername(username);
+        return orders.stream().map(OrderDTO::new).collect(toList());
     }
 
     public OrderDTO addOrder(OrderRequestDTO payload) {
@@ -48,10 +48,10 @@ public class OrderService {
         return new OrderDTO(order);
     }
 
-    public OrderDTO findByUserId(String userId) {
-       Order order = orderRepository.findByUserId(userId);
+    public List<OrderDTO> findByUserId(String userId) {
+       List<Order> orders = orderRepository.findByUserId(userId);
 
-        return new OrderDTO(order);
+        return orders.stream().map(OrderDTO::new).collect(toList());
     }
 
     public OrderDTO updateOrder(String id, OrderRequestDTO payload) {
