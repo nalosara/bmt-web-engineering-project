@@ -33,7 +33,7 @@ public class MainSocketHandler implements WebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         String uri = session.getUri().toString();
-        String token =  uri.substring(36);
+        String token =  uri.substring(60);
         User user = getUser(token);
         if (user == null) {
             session.close();
