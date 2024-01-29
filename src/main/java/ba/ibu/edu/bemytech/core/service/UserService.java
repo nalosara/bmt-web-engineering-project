@@ -1,30 +1,24 @@
 package ba.ibu.edu.bemytech.core.service;
 
-import ba.ibu.edu.bemytech.core.api.mailsender.MailSender;
 import ba.ibu.edu.bemytech.core.exceptions.repository.ResourceNotFoundException;
 import ba.ibu.edu.bemytech.core.model.User;
+import ba.ibu.edu.bemytech.core.model.enums.UserType;
 import ba.ibu.edu.bemytech.core.repository.UserRepository;
 import ba.ibu.edu.bemytech.rest.dto.UserDTO;
 import ba.ibu.edu.bemytech.rest.dto.UserRequestDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
-
-    @Autowired
-    private MailSender mailSender;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -44,14 +38,19 @@ public class UserService {
         return new UserDTO(user.get());
     }
 
-    public UserDTO getUserByUsername(String username) {
+    public User findById(String id) {
+        User user = userRepository.findUserById(id);
+        return user;
+    }
+
+    public Optional<User> getUserByUsername(String username) {
         Optional<User> user = userRepository.findUserByUsername(username);
         if (user.isPresent()) {
             System.out.println("User found for username: " + username);
         } else {
             System.out.println("User not found for username: " + username);
         }
-        return new UserDTO(user.get());
+        return user;
     }
 
     public UserDTO addUser(UserRequestDTO payload) {
@@ -75,14 +74,9 @@ public class UserService {
         user.ifPresent(userRepository::delete);
     }
 
-    public String sendEmailToAllUsers(String message) {
-        List<User> users = userRepository.findAll();
-        return mailSender.send(users, message);
-    }
-
-    public UserDTO filterByEmail(String email) {
-        Optional<User> user = userRepository.findFirstByEmailLike(email);
-        return user.map(UserDTO::new).orElse(null);
+    public List<User> findByUserType(UserType userType) {
+        List<User> users = userRepository.findByUserType(userType);
+        return users;
     }
 
     public UserDetailsService userDetailsService() {
@@ -94,4 +88,6 @@ public class UserService {
             }
         };
     }
+
+
 }

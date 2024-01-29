@@ -3,6 +3,7 @@ package ba.ibu.edu.bemytech.rest.controllers;
 import ba.ibu.edu.bemytech.core.service.ProductService;
 import ba.ibu.edu.bemytech.rest.dto.ProductDTO;
 import ba.ibu.edu.bemytech.rest.dto.ProductRequestDTO;
+import ba.ibu.edu.bemytech.rest.websockets.MainSocketHandler;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,10 @@ import java.util.List;
 @SecurityRequirement(name = "JWT Security")
 public class ProductController {
     private final ProductService productService;
-
-    public ProductController(ProductService productService) {
+    private  final MainSocketHandler mainSocketHandler;
+    public ProductController(ProductService productService, MainSocketHandler mainSocketHandler) {
         this.productService = productService;
+        this.mainSocketHandler = mainSocketHandler;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
@@ -29,6 +31,7 @@ public class ProductController {
     @RequestMapping(method = RequestMethod.POST, path = "/add-product")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductRequestDTO product) {
+        mainSocketHandler.broadcastNewProductAdded(product);
         return ResponseEntity.ok(productService.addProduct(product));
     }
 
@@ -38,7 +41,7 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable String id, @RequestBody ProductRequestDTO product) {
         return ResponseEntity.ok(productService.updateProduct(id, product));
     }

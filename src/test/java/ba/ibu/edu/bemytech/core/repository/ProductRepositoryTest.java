@@ -1,6 +1,5 @@
 package ba.ibu.edu.bemytech.core.repository;
 
-import ba.ibu.edu.bemytech.core.model.Order;
 import ba.ibu.edu.bemytech.core.model.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

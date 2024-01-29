@@ -1,7 +1,11 @@
 package ba.ibu.edu.bemytech.core.service;
 
+import ba.ibu.edu.bemytech.api.impl.mailsender.MailgunSender;
+import ba.ibu.edu.bemytech.core.api.mailsender.MailSender;
 import ba.ibu.edu.bemytech.core.exceptions.repository.ResourceNotFoundException;
+import ba.ibu.edu.bemytech.core.model.Contact;
 import ba.ibu.edu.bemytech.core.model.Order;
+import ba.ibu.edu.bemytech.core.model.User;
 import ba.ibu.edu.bemytech.core.repository.OrderRepository;
 import ba.ibu.edu.bemytech.rest.dto.OrderDTO;
 import ba.ibu.edu.bemytech.rest.dto.OrderRequestDTO;
@@ -9,6 +13,7 @@ import ba.ibu.edu.bemytech.rest.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +22,11 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final UserService userService;
+    private final MailgunSender mailgunSender;
 
-    public OrderService(OrderRepository orderRepository, UserService userService) {
+    public OrderService(OrderRepository orderRepository, MailgunSender mailgunSender) {
         this.orderRepository = orderRepository;
-        this.userService = userService;
+        this.mailgunSender = mailgunSender;
     }
 
     public List<OrderDTO> getOrders() {
@@ -69,4 +74,19 @@ public class OrderService {
         Optional<Order> order = orderRepository.findById(id);
         order.ifPresent(orderRepository::delete);
     }
+
+    public boolean sendConfirmationEmail(User user, OrderDTO order) {
+        try {
+            String recipientEmail = user.getEmail();
+            String subject = "Order Confirmation";
+            String message = "Thank you for your order. Your order ID is: " + order.getId();
+            System.out.println(message);
+            mailgunSender.send(Collections.singletonList(user), message);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

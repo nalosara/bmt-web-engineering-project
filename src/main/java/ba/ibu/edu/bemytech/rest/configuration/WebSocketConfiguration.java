@@ -14,8 +14,9 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
     @Autowired
     MainSocketHandler mainSocketHandler;
 
+    @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        System.out.println("WebSocket handlers registered.");
         registry.addHandler(mainSocketHandler, "/websocket").setAllowedOrigins("*");
     }
-
 }

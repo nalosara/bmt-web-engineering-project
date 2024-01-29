@@ -1,5 +1,6 @@
 package ba.ibu.edu.bemytech.core.service;
 
+import ba.ibu.edu.bemytech.core.exceptions.auth.UserAlreadyExistsException;
 import ba.ibu.edu.bemytech.core.exceptions.repository.ResourceNotFoundException;
 import ba.ibu.edu.bemytech.core.model.User;
 import ba.ibu.edu.bemytech.core.repository.UserRepository;
@@ -31,13 +32,15 @@ public class AuthService {
     }
 
     public UserDTO signUp(UserRequestDTO userRequestDTO) {
-        userRequestDTO.setPassword(
+
+        if (userRepository.existsByUsername(userRequestDTO.getUsername())) {
+            throw new UserAlreadyExistsException("Username is already in use. Please choose a different username.");
+        }
+            userRequestDTO.setPassword(
                 passwordEncoder.encode(userRequestDTO.getPassword())
         );
-        User user = userRepository.save(userRequestDTO.toEntity());
-
-
-        return new UserDTO(user);
+            User user = userRepository.save(userRequestDTO.toEntity());
+            return new UserDTO(user);
     }
 
     public LoginDTO signIn(LoginRequestDTO loginRequestDTO) {
@@ -47,10 +50,6 @@ public class AuthService {
         User user = userRepository.findByEmail(loginRequestDTO.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("This user does not exist."));
         String jwt = jwtService.generateToken(user);
-
-
         return new LoginDTO(jwt);
     }
-
-
 }
