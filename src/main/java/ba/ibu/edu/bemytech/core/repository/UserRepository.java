@@ -1,6 +1,7 @@
 package ba.ibu.edu.bemytech.core.repository;
 
 import ba.ibu.edu.bemytech.core.model.User;
+import ba.ibu.edu.bemytech.core.model.enums.UserType;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -17,7 +18,11 @@ public interface UserRepository extends MongoRepository<User, String> {
     @Query(value="{$or:[{email:'?0'}, {username:'?0'}]}")
     Optional<User> findByUsernameOrEmail(String username);
 
-    Optional<User> findFirstByEmailLike(String emailPattern);
+    Optional<User> findUserByUsername(String username);
 
+    User findUserById(String id);
 
+    List<User> findByUserType(UserType userType);
+
+    boolean existsByUsername(String username);
 }

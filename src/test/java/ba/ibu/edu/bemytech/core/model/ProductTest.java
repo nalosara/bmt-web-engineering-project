@@ -12,7 +12,7 @@ public class ProductTest {
     void shouldCreateNewProduct() {
         Product product = new Product("id1", "New Product", "New Description", 10, 14.99);
 
-        Assertions.assertEquals("New Product", product.getProductName());
+        Assertions.assertEquals("New Product", product.getName());
     }
 
     @Test

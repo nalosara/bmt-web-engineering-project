@@ -8,4 +8,5 @@ import java.util.List;
 @Component
 public interface MailSender {
     public String send(List<User> users, String message);
+
 }

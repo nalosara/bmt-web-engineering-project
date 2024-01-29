@@ -1,28 +1,34 @@
 package ba.ibu.edu.bemytech.rest.dto;
 
 import ba.ibu.edu.bemytech.core.model.Order;
-import ba.ibu.edu.bemytech.core.model.OrderedProduct;
+import ba.ibu.edu.bemytech.core.model.Product;
 
 import java.util.Date;
 import java.util.List;
 
 public class OrderRequestDTO {
     private String userId;
-    private List<OrderedProduct> products;
+    private String username;
+    private Product product;
+    private int quantity;
     private String address;
 
     public OrderRequestDTO() {}
 
     public OrderRequestDTO(Order order) {
         this.userId = order.getUserId();
-        this.products = order.getProducts();
+        this.product = order.getProduct();
+        this.username = order.getUsername();
         this.address = order.getAddress();
+        this.quantity = order.getQuantity();
     }
 
     public Order toEntity() {
         Order order = new Order();
         order.setUserId(userId);
-        order.setProducts(products);
+        order.setUsername(username);
+        order.setQuantity(quantity);
+        order.setProduct(product);
         order.setAddress(address);
         order.setOrderDate(new Date());
         return order;
@@ -36,6 +42,14 @@ public class OrderRequestDTO {
         this.userId = userId;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -44,11 +58,19 @@ public class OrderRequestDTO {
         this.address = address;
     }
 
-    public List<OrderedProduct> getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(List<OrderedProduct> products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

@@ -1,6 +1,5 @@
 package ba.ibu.edu.bemytech.core.repository;
 
-import ba.ibu.edu.bemytech.core.model.Order;
 import ba.ibu.edu.bemytech.core.model.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,12 +19,12 @@ public class ProductRepositoryTest {
         List<Product> products = productRepository.findAll();
 
         Assertions.assertEquals(2, products.size());
-        Assertions.assertEquals("BeMyStep", products.get(0).getProductName());
+        Assertions.assertEquals("BeMyStep", products.get(0).getName());
     }
 
     @Test
     public void shouldFindProductByProductName() {
-        Optional<Product> product = productRepository.findByProductName("BeMyStep");
+        Optional<Product> product = productRepository.findByName("BeMyStep");
         Assertions.assertNotNull(product.orElse(null));
     }
 }

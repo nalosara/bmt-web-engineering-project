@@ -1,5 +1,6 @@
 package ba.ibu.edu.bemytech.rest.controllers;
 
+import ba.ibu.edu.bemytech.core.model.User;
 import ba.ibu.edu.bemytech.core.service.UserService;
 import ba.ibu.edu.bemytech.rest.dto.UserDTO;
 import ba.ibu.edu.bemytech.rest.dto.UserRequestDTO;
@@ -10,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -27,20 +29,20 @@ public class UserController {
         return ResponseEntity.ok(userService.getUsers());
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/register")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<UserDTO> register(@RequestBody UserRequestDTO user) {
-        return ResponseEntity.ok(userService.addUser(user));
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/user-by-id/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDTO> getUserById(@PathVariable String id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/user-by-username/{username}")
+    @PreAuthorize("hasAnyAuthority('MEMBER', 'ADMIN')")
+    public ResponseEntity<Optional<User>> getUserByUsername(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUserByUsername(username));
+    }
+
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MEMEBER', 'ADMIN')")
     public ResponseEntity<UserDTO> updateUser(@PathVariable String id, @RequestBody UserRequestDTO user) {
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
@@ -52,8 +54,4 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/send-to-all")
-    public String sendEmailToAllUsers(@RequestParam String message) {
-        return userService.sendEmailToAllUsers(message);
-    }
 }

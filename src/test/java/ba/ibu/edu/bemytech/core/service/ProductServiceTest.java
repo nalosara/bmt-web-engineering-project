@@ -26,7 +26,7 @@ public class ProductServiceTest {
         when(productRepository.save(any(Product.class))).thenReturn(product);
 
         Product savedProduct = productRepository.save(product);
-        assertThat(product.getProductName()).isSameAs(savedProduct.getProductName());
-        assertNotNull(savedProduct.getProductName());
+        assertThat(product.getName()).isSameAs(savedProduct.getName());
+        assertNotNull(savedProduct.getName());
     }
 }
