@@ -24,3 +24,7 @@ security:
   jwt:
     secret: 'QTcxvcLS0IR3JFLLkvMOBvXCde7DB8lKCnMMGOyI59s'
 
+management:
+  security:
+    enabled: false
+
