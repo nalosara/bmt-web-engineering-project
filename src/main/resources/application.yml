@@ -18,7 +18,7 @@ email:
     domain: https://api.mailgun.net/v3/sandbox5b75a339780841dc934b54cd16ab2801.mailgun.org
     from-email: BMT WebShop <mailgun@sandbox5b75a339780841dc934b54cd16ab2801.mailgun.org>
     username: api
-    password: 6bef0d2d91effac19b6ce69f4159e896-063062da-bedcbd05
+    password: 66e42eb02e266587b3ba8cdf3d615fcc-69a6bd85-700f74d5
 
 security:
   jwt:
